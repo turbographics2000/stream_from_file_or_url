@@ -40,7 +40,8 @@ function createStreamTrack(blob) {
             }
             if (videoStream.getAudioTracks().length) {
                 tracks.audioTrack = videoStream.getAudioTracks()[0];
-            } else if (videoStream.getVideoTracks().length) {
+            }
+            if (videoStream.getVideoTracks().length) {
                 tracks.videoTrack = videoStream.getVideoTracks()[0];
             }
             videoStream = null;
