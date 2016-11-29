@@ -31,7 +31,8 @@ function createStreamTrack(blob) {
     return new Promise((resolve, reject) => {
         let video = document.createElement('video');
         video.onloadeddata = function () {
-            video.volume = 0;
+            //video.volume = 0;
+            video.muted = true;
             video.play();
             let tracks = {};
             video.captureStream = video.captureStream || video.mozCaptureStream;
