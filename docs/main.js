@@ -45,6 +45,7 @@ function createStreamTrack(blob) {
                 tracks.videoTrack = videoStream.getVideoTracks()[0];
             }
             videoStream = null;
+            video.play();
             resolve(tracks);
         }
         video.src = URL.createObjectURL(blob);
