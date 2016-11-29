@@ -14,7 +14,7 @@ let renderStreamId;
 
 btnFromURL.onclick = function () {
     Promise.all([
-        fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
+        //fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
         fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
     ]).then(([tracksA, tracksB]) => {
         let tracks = [];
