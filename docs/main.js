@@ -24,7 +24,7 @@ btnFromURL.onclick = function () {
         //tracks.push(tracksB.audioTrack);
         if (tracksB.videoTrack) tracks.push(tracksB.videoTrack);
         preview.srcObject = new MediaStream(tracks);
-        preview.oncanplay = function() {
+        preview.onloadedmetadata = function() {
             preview.play();
         }
     });
