@@ -28,6 +28,7 @@ btnFromURL.onclick = function () {
 function createStreamTrack(blob) {
     return new Promise((resolve, reject) => {
         let video = document.createElement('video');
+        video.loop = true;
         video.onloadeddata = function () {
             video.play();
             let tracks = {};
