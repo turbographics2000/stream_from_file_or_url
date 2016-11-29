@@ -1,4 +1,4 @@
-window.MediaStream = window.MediaStream || window.webkitMediaSteam;
+window.MediaStream = window.MediaStream || window.webkitMediaStream;
 let cnv = document.createElement('canvas');
 let ctx = cnv.getContext('2d');
 cnv.style.position = 'absolute'
