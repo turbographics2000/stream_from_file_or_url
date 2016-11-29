@@ -1,0 +1,2 @@
+# stream_from_file_or_url
+ファイルまたはURLからストリーム生成テスト
