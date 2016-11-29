@@ -12,14 +12,14 @@ video.height = 240;
 let renderStreamId;
 
 
-btnFromURL.onclick = function() {
+btnFromURL.onclick = function () {
     Promise.all([
         fetch('a.mp3').then(res => res.blob()).then(blob => createStreamTrack(blob)),
         fetch('v.webm').then(res => res.blob()).then(blob => createStreamTrack(blob)),
     ]).then(([tracksA, tracksB]) => {
         let tracks = [];
         tracks.push(tracksA.audioTrack || tracksB.audioTrack);
-        if(tracksB.renderVideoTrack)tracks.push(tracksB.videoTrack);
+        if (tracksB.videoTrack) tracks.push(tracksB.videoTrack);
         preview.srcObject = new MediaStream(tracks);
         preview.play();
     });
@@ -28,7 +28,7 @@ btnFromURL.onclick = function() {
 function createStreamTrack(blob) {
     return new Promise((resolve, reject) => {
         let video = document.createElement('video');
-        video.onloadeddata = function() {
+        video.onloadeddata = function () {
             let tracks = {};
             if (video.captureStream) {
                 videoStream = video.captureStream();
