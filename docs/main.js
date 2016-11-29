@@ -36,9 +36,9 @@ function createStreamTrack(blob) {
                 }
             }
             if (videoStream.getAudioTracks().length) {
-                tracks.audioTrack = stream.getAudioTracks()[0];
+                tracks.audioTrack = videoStream.getAudioTracks()[0];
             } else if (videoStream.getVideoTracks().length) {
-                tracks.videoTrack = stream.getVideoTracks()[0];
+                tracks.videoTrack = videoStream.getVideoTracks()[0];
             }
             videoStream = null;
             resolve(tracks);
