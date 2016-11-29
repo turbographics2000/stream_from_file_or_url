@@ -11,25 +11,6 @@ video.height = 240;
 let renderStreamId;
 
 
-document.body.ondragover = function(evt) {
-    evt.preventDefault();
-}
-
-document.body.ondrop = function(evt) {
-    evt.preventDefault();
-    let files = Array.from(evt.dataTransfer.files);
-    if (!files.length) return;
-    let supportedFiles = files.filter(file => !!dadThumbs[0].canPlayType(file.type));
-    if (!supportedFiles.length) return;
-    supportedFiles.forEach(file => {
-        if (file.type.startsWith('audio')) {
-            createAudioTrack(file);
-        } else if (file.type.startsWith('video')) {
-            createVideoTrack(file);
-        }
-    })
-}
-
 btnFromURL.onclick = function() {
     Promise.all([
         fetch('a.mp3').then(res => res.blob()).then(blob => createStreamTrack(blob)),
