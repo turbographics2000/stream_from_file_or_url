@@ -14,13 +14,13 @@ let renderStreamId;
 
 btnFromURL.onclick = function () {
     Promise.all([
-        //fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
+        fetch('a.mp3').then(res => res.blob()).then(blob => createStreamTrack(blob)),
         fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
-    ]).then(([/*tracksA, */tracksB]) => {
+    ]).then(([tracksA, tracksB]) => {
         let tracks = [];
-        // if (tracksA.audioTrack || tracksB.audioTrack) {
-        //     tracks.push(tracksA.audioTrack || tracksB.audioTrack);
-        // }
+        if (tracksA.audioTrack || tracksB.audioTrack) {
+            tracks.push(tracksA.audioTrack || tracksB.audioTrack);
+        }
         //tracks.push(tracksB.audioTrack);
         if (tracksB.videoTrack) tracks.push(tracksB.videoTrack);
         preview.srcObject = new MediaStream(tracks);
@@ -35,7 +35,7 @@ function createStreamTrack(blob) {
             video.muted = true;
             video.play();
             let tracks = {};
-            //video.captureStream = video.captureStream || video.mozCaptureStream;
+            video.captureStream = video.captureStream || video.mozCaptureStream;
             if (video.captureStream) {
                 videoStream = video.captureStream();
             } else if (video.videoWidth) {
