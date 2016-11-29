@@ -17,7 +17,7 @@ btnFromURL.onclick = function() {
         fetch('a.mp3').then(res => res.blob()).then(blob => createStreamTrack(blob)),
         fetch('v.webm').then(res => res.blob()).then(blob => createStreamTrack(blob)),
     ]).then(([tracksA, tracksB]) => {
-        preview.srcObject = MediaStream([tracksA.audioTrack || tracksB.audioTrack, tracksB.videoTrack]);
+        preview.srcObject = new MediaStream([tracksA.audioTrack || tracksB.audioTrack, tracksB.videoTrack]);
         preview.play();
     });
 }
