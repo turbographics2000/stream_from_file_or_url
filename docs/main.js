@@ -16,11 +16,12 @@ btnFromURL.onclick = function () {
     Promise.all([
         //fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
         fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
-    ]).then(([tracksA, tracksB]) => {
+    ]).then(([/*tracksA, */tracksB]) => {
         let tracks = [];
-        if (tracksA.audioTrack || tracksB.audioTrack) {
-            tracks.push(tracksA.audioTrack || tracksB.audioTrack);
-        }
+        // if (tracksA.audioTrack || tracksB.audioTrack) {
+        //     tracks.push(tracksA.audioTrack || tracksB.audioTrack);
+        // }
+        tracks.push(tracksB.audioTrack);
         if (tracksB.videoTrack) tracks.push(tracksB.videoTrack);
         preview.srcObject = new MediaStream(tracks);
         preview.play();
