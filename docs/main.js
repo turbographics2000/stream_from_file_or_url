@@ -54,7 +54,7 @@ function createStreamTrack(blob) {
 }
 
 function render(renderVideoTrack) {
-    renderStreamId = requestAnimationFrame(renderVideoTrack);
+    renderStreamId = requestAnimationFrame(render);
     let ratio = Math.min(cnv.width / video.videoWidth, cnv.height / video.videoHeight);
     let width = video.videoWidth * ratio;
     let height = video.videoHeight * ratio;
