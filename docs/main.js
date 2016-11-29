@@ -5,7 +5,7 @@ cnv.style.position = 'absolute'
 cnv.style.top = '-10000px';
 cnv.width = 320;
 cnv.height = 240;
-document.body.appendChild(cnv);
+//document.body.appendChild(cnv);
 let video = document.createElement('video');
 video.width = 320;
 video.height = 240;
@@ -33,9 +33,9 @@ function createStreamTrack(blob) {
         video.onloadeddata = function () {
             //video.volume = 0;
             video.muted = true;
-            //video.play();
+            video.play();
             let tracks = {};
-            video.captureStream = video.captureStream || video.mozCaptureStream;
+            //video.captureStream = video.captureStream || video.mozCaptureStream;
             if (video.captureStream) {
                 videoStream = video.captureStream();
             } else if (video.videoWidth) {
