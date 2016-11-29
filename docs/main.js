@@ -45,11 +45,12 @@ function createStreamTrack(blob) {
                 }
             }
             if (videoStream.getAudioTracks().length) {
-                tracks.audioTrack = videoStream.getAudioTracks()[0];
+                tracks.audioTrack = videoStream.getAudioTracks()[0].clone();
             }
             if (videoStream.getVideoTracks().length) {
-                tracks.videoTrack = videoStream.getVideoTracks()[0];
+                tracks.videoTrack = videoStream.getVideoTracks()[0].clone();
             }
+            videoStream.getTracks.forEach(track => videoStream.removeTrack(track));
             videoStream = null;
             resolve(tracks);
         }
