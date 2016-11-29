@@ -1,8 +1,3 @@
-var thumbCnt = 3
-var dadThumbContainer = document.querySelector('draganddrop-thumb-container') || document.createElement('div');
-dadThumbContainer.classList.add('draganddrop-thumb-container');
-dadThumbContainer.style.display = 'none';
-var dadThumbs = document.querySelectorAll('.draganddrop-thumb');
 let cnv = document.createElement('canvas');
 let ctx = cnv.getContext('2d');
 cnv.style.position = 'absolute'
@@ -16,31 +11,9 @@ video.height = 240;
 let renderStreamId;
 
 
-if (this.dadThumbs.length) {
-    this.dadThumbs.forEach(elm => elm.autoplay = true);
-} else {
-    this.dadThumbs = [];
-    for (let i = 0; i < thumbCnt; i++) {
-        let video = document.createElement('video');
-        video.classList.add('draganddrop-thumb');
-        video.autoplay = true;
-        dadThumbs.push(video);
-        dadThumbContainer.appendChild(video);
-    }
-}
-document.body.appendChild(dadThumbContainer);
-dadThumbs[0].src = 'ed3d_sidebyside-RL-2x1920x1038_24fps.webm';
-dadThumbs[0].muted = true;
-
-
-document.documentElement.ondragstart = function(evt) {
-    console.log('dragstart', evt);
-};
-
-function onDragOver(evt) {
+document.body.ondragover = function(evt) {
     evt.preventDefault();
 }
-document.body.ondragover = onDragOver;
 
 document.body.ondrop = function(evt) {
     evt.preventDefault();
