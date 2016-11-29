@@ -50,7 +50,7 @@ function createStreamTrack(blob) {
             if (videoStream.getVideoTracks().length) {
                 tracks.videoTrack = videoStream.getVideoTracks()[0].clone();
             }
-            videoStream.getTracks.forEach(track => videoStream.removeTrack(track));
+            videoStream.getTracks().forEach(track => videoStream.removeTrack(track));
             videoStream = null;
             resolve(tracks);
         }
