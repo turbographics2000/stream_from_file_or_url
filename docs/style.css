@@ -1,0 +1,40 @@
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#dropArea {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    border: 3px gray dashed;
+}
+
+#dragElement {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    left: 120px;
+    top: 10px;
+    background: #332299;
+}
+
+#msg {
+    font-family: monospace;
+}
+
+.draganddrop-thumb-container {
+    display: inline-block;
+}
+
+.draganddrop-thumb {
+    width: 128px;
+    height: 96px;
+    margin-left: 5px;
+    background: black;
+    object-fit: contain;
+}
