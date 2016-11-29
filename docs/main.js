@@ -24,9 +24,6 @@ btnFromURL.onclick = function () {
         //tracks.push(tracksB.audioTrack);
         if (tracksB.videoTrack) tracks.push(tracksB.videoTrack);
         preview.srcObject = new MediaStream(tracks);
-        preview.onloadedmetadata = function() {
-            preview.play();
-        }
     });
 }
 
@@ -34,7 +31,7 @@ function createStreamTrack(blob) {
     return new Promise((resolve, reject) => {
         //let video = document.createElement('video');
         video.onloadeddata = function () {
-            //video.volume = 0;
+            video.volume = 0;
             video.muted = true;
             video.play();
             let tracks = {};
