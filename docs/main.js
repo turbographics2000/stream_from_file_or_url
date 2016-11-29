@@ -21,7 +21,7 @@ btnFromURL.onclick = function() {
     });
 }
 
-function createVideoTrack(blob) {
+function createStreamTrack(blob) {
     return new Promise((resolve, reject) => {
         let video = document.createElement('video');
         video.src = URL.createObjectURL(blob);
