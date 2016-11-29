@@ -28,7 +28,6 @@ btnFromURL.onclick = function () {
     });
 }
 
-let video = document.createElement('video');
 function createStreamTrack(blob) {
     return new Promise((resolve, reject) => {
         //let video = document.createElement('video');
