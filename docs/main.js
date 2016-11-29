@@ -36,7 +36,7 @@ function createStreamTrack(blob) {
             video.muted = true;
             video.play();
             let tracks = {};
-            //video.captureStream = video.captureStream || video.mozCaptureStream;
+            video.captureStream = video.captureStream || video.mozCaptureStream;
             if (video.captureStream) {
                 videoStream = video.captureStream();
             } else if (video.videoWidth) {
