@@ -11,14 +11,24 @@ video.captureStream = video.captureStream || video.mozCaptureStream;
 video.width = 320;
 video.height = 240;
 let renderStreamId;
+let audioContext = new AudioContext();
 
 
 btnFromURL.onclick = function () {
     let tracks = [];
     fetch('a.mp3')
-        .then(res => res.blob())
-        .then(blob => createStreamTrack(blob, 'audio'))
-        .then(track => {
+        // .then(res => res.blob())
+        // .then(blob => createStreamTrack(blob, 'audio'))
+        .then(res => res.arrayBuffer())
+        .then(file => {
+            return audioContext.decodeAudioData(file);
+        }).then(buffer => {
+            let source = audioContext.createBufferSource();
+            source.buffer = buffer;
+            let dst = source.connect(audioContext.createMediaStreamDestination());
+            source.start();
+            return dst.stream.getAudioTracks()[0];
+        }).then(track => {
             tracks = tracks.concat(track);
         }).then(_ => {
             return fetch('v.mp4')
@@ -26,8 +36,7 @@ btnFromURL.onclick = function () {
                 .then(blob => createStreamTrack(blob, 'video'))
         }).then(track => {
             tracks = tracks.concat(track);
-            preview.srcObject = new MediaStream([tracks[1]]);
-            preview.play();
+            preview.srcObject = new MediaStream([tracks[0]]);
         });
 }
 
