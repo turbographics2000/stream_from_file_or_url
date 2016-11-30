@@ -26,7 +26,7 @@ btnFromURL.onclick = function () {
                 .then(blob => createStreamTrack(blob, 'video'))
         }).then(track => {
             tracks = tracks.concat(track);
-            preview.srcObject = new MediaStream([tracks[0]]);
+            preview.srcObject = new MediaStream([tracks[1]]);
             preview.play();
         });
 }
