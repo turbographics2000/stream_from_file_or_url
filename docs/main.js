@@ -33,7 +33,7 @@ btnFromURL.onclick = function () {
 function createStreamTrack(blob, kind) {
     return new Promise((resolve, reject) => {
         video.onloadeddata = function () {
-            video.muted = true;
+            video.volume = 0;
             video.play();
             if (video.captureStream) {
                 videoStream = video.captureStream();
