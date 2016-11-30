@@ -27,6 +27,7 @@ btnFromURL.onclick = function () {
         }).then(track => {
             tracks = tracks.concat(track);
             preview.srcObject = new MediaStream([tracks[0]]);
+            preview.play();
         });
 }
 
