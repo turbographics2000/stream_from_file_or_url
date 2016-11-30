@@ -19,13 +19,13 @@ btnFromURL.onclick = function () {
         .then(res => res.blob())
         .then(blob => createStreamTrack(blob, 'audio'))
         .then(track => {
-            tracks.concat(track);
+            tracks = tracks.concat(track);
         }).then(_ => {
             return fetch('v.mp4')
                 .then(res => res.blob())
                 .then(blob => createStreamTrack(blob, 'video'))
         }).then(track => {
-            tracks.concat(track);
+            tracks = tracks.concat(track);
             preview.srcObject = new MediaStream(tracks);
         });
 }
