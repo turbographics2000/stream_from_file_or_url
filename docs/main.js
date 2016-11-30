@@ -7,35 +7,34 @@ cnv.width = 320;
 cnv.height = 240;
 //document.body.appendChild(cnv);
 let video = document.createElement('video');
+video.captureStream = video.captureStream || video.mozCaptureStream;
 video.width = 320;
 video.height = 240;
 let renderStreamId;
 
 
 btnFromURL.onclick = function () {
-    Promise.all([
-        fetch('a.mp3').then(res => res.blob()).then(blob => createStreamTrack(blob)),
-        fetch('v.mp4').then(res => res.blob()).then(blob => createStreamTrack(blob)),
-    ]).then(([tracksA, tracksB]) => {
-        let tracks = [];
-        if (tracksA.audioTrack || tracksB.audioTrack) {
-            tracks.push(tracksA.audioTrack || tracksB.audioTrack);
-        }
-        //tracks.push(tracksB.audioTrack);
-        if (tracksB.videoTrack) tracks.push(tracksB.videoTrack);
-        preview.srcObject = new MediaStream(tracks);
-    });
+    let tracks = [];
+    fetch('a.mp3')
+        .then(res => res.blob())
+        .then(blob => createStreamTrack(blob, 'audio'))
+        .then(track => {
+            tracks.push(track);
+        }).then(_ => {
+            return fetch('v.mp4')
+                .then(res => res.blob())
+                .then(blob => createStreamTrack(blob, 'video'))
+        }).then(track => {
+            tracks.push(track);
+            preview.srcObject = new MediaStream(tracks);
+        });
 }
 
-function createStreamTrack(blob) {
+function createStreamTrack(blob, kind) {
     return new Promise((resolve, reject) => {
-        //let video = document.createElement('video');
         video.onloadeddata = function () {
-            video.volume = 0;
             video.muted = true;
             video.play();
-            let tracks = {};
-            video.captureStream = video.captureStream || video.mozCaptureStream;
             if (video.captureStream) {
                 videoStream = video.captureStream();
             } else if (video.videoWidth) {
@@ -44,15 +43,12 @@ function createStreamTrack(blob) {
                     renderStreamId = requestAnimationFrame(render);
                 }
             }
-            if (videoStream.getAudioTracks().length) {
-                tracks.audioTrack = videoStream.getAudioTracks()[0].clone();
+            let tracks = videoStream.getTracks();
+            if(kind) {
+                resolve(tracks.filter(track => track.kind === kind));
+            } else {
+                resolve(tracks);
             }
-            if (videoStream.getVideoTracks().length) {
-                tracks.videoTrack = videoStream.getVideoTracks()[0].clone();
-            }
-            videoStream.getTracks().forEach(track => videoStream.removeTrack(track));
-            videoStream = null;
-            resolve(tracks);
         }
         video.src = URL.createObjectURL(blob);
     });
